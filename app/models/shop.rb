@@ -28,7 +28,7 @@ class Shop < ApplicationRecord
   end
 
   def self.percentile_50
-    median(where("post_code LIKE ?", "%LS2%").pluck(:chairs))
+    median(where("post_code LIKE ?", "%LS2%").order(:chairs).pluck(:chairs))
   end
 
   def small_or_large
