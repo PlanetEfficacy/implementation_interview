@@ -6,11 +6,16 @@ class Categorizer
 
   def assign_category!
     if shop.prefix == "ls1"
-      shop.category = "#{shop.prefix} #{shop.size}"
+      shop.update(category: "#{shop.prefix} #{shop.size}")
     elsif shop.prefix == "ls2"
-      shop.category = "#{shop.prefix} #{shop.small_or_large}"
+      puts "Processing shop #{shop.id} #{shop.name}"
+      puts "shop prefix = #{shop.prefix}"
+      puts "shop small or large = #{shop.small_or_large}"
+      puts "shop category was ##{shop.category}"
+      shop.update(category: "#{shop.prefix} #{shop.small_or_large}")
+      puts "shop category was is #{shop.category}"
     else
-      shop.category = "other"
+      shop.update(category: "other")
     end
   end
 

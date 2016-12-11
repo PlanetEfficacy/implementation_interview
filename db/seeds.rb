@@ -11,7 +11,9 @@ csv.each do |row|
 end
 
 
-Shop.all.each do |shop|
+Shop.all.pluck(:id).each do |id|
+# Shop.all.each do |shop|
+  shop = Shop.find(id)
   puts "Shop #{shop.id} category was #{shop.category}."
   Categorizer.new(shop).assign_category!
   puts "Shop #{shop.id} category is now #{shop.category}."

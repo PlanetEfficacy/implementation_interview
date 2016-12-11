@@ -29,6 +29,7 @@ RSpec.describe Categorizer do
 
     list = [shop_1, shop_2, shop_3, shop_4, shop_5, shop_6, shop_7, shop_8,
             shop_9, shop_10]
+
     list.each do |shop|
       Categorizer.new(shop).assign_category!
     end
@@ -38,6 +39,7 @@ RSpec.describe Categorizer do
     expect(shop_3.category).to eq("ls2 small")
     expect(shop_4.category).to eq("ls2 small")
     expect(shop_5.category).to eq("ls2 small")
+    binding.pry
     expect(shop_6.category).to eq("ls2 large")
     expect(shop_7.category).to eq("ls2 large")
     expect(shop_8.category).to eq("ls2 large")
