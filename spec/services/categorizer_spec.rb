@@ -1,13 +1,3 @@
-# 5) Write a Rails script to categorize the cafes and write the result to the category according to the rules:[provide the script]
-#     A) If the Post Code is of the LS1 prefix type:
-#         # of chairs less than 10: category = 'ls1 small'
-#         # of chairs greater than or equal to 10, less than 100: category = 'ls1 medium'
-#         # of chairs greater than or equal to 100: category = 'ls1 large'
-#     B) If the Post Code is of the LS2 prefix type:
-#         # of chairs below the 50th percentile for ls2: category = 'ls2 small'
-#         # of chairs above the 50th percentile for ls2: category = 'ls2 large'
-#     C) For Post Code is something else:
-#         category = 'other'
 require 'rails_helper'
 
 RSpec.describe Categorizer do
