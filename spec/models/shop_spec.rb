@@ -39,4 +39,69 @@ RSpec.describe Shop, type: :model do
     chairs = Shop.max_chairs_at_post("1")
     expect(chairs).to eq(80)
   end
+
+  it "has a prefix" do
+    shop_1 = create(:shop, post_code: "LS1 XXX")
+    shop_2 = create(:shop, post_code: "LS2 XXX")
+    shop_3 = create(:shop, post_code: "LS7 XXX")
+    shop_4 = create(:shop, post_code: "LS10 XXX")
+
+    expect(shop_1.prefix).to eq("ls1")
+    expect(shop_2.prefix).to eq("ls2")
+    expect(shop_3.prefix).to eq("other")
+    expect(shop_4.prefix).to eq("other")
+  end
+
+  it "has a size" do
+    shop_1 = create(:shop, chairs: 9)
+    shop_2 = create(:shop, chairs: 10)
+    shop_3 = create(:shop, chairs: 100)
+
+    expect(shop_1.size).to eq("small")
+    expect(shop_2.size).to eq("medium")
+    expect(shop_3.size).to eq("large")
+  end
+
+  it "it has a 50th percentile for LS2" do
+    shop_1 = create(:shop, post_code: "LS2 XXX", chairs: 6)
+    shop_2 = create(:shop, post_code: "LS2 XXX", chairs: 18)
+    shop_3 = create(:shop, post_code: "LS2 XXX", chairs: 20)
+    shop_4 = create(:shop, post_code: "LS2 XXX", chairs: 20)
+    shop_5 = create(:shop, post_code: "LS2 XXX", chairs: 20)
+    shop_6 = create(:shop, post_code: "LS2 XXX", chairs: 51)
+    shop_7 = create(:shop, post_code: "LS2 XXX", chairs: 84)
+    shop_8 = create(:shop, post_code: "LS2 XXX", chairs: 96)
+    shop_9 = create(:shop, post_code: "LS2 XXX", chairs: 118)
+    shop_10 = create(:shop, post_code: "LS2 XXX", chairs: 140)
+
+    create(:shop, post_code: "LS1 XXX", chairs: 10)
+
+    expect(Shop.percentile_50).to eq(35.5)
+  end
+
+  it "is small or large based on percentile" do
+    shop_1 = create(:shop, post_code: "LS2 XXX", chairs: 6)
+    shop_2 = create(:shop, post_code: "LS2 XXX", chairs: 18)
+    shop_3 = create(:shop, post_code: "LS2 XXX", chairs: 20)
+    shop_4 = create(:shop, post_code: "LS2 XXX", chairs: 20)
+    shop_5 = create(:shop, post_code: "LS2 XXX", chairs: 20)
+    shop_6 = create(:shop, post_code: "LS2 XXX", chairs: 51)
+    shop_7 = create(:shop, post_code: "LS2 XXX", chairs: 84)
+    shop_8 = create(:shop, post_code: "LS2 XXX", chairs: 96)
+    shop_9 = create(:shop, post_code: "LS2 XXX", chairs: 118)
+    shop_10 = create(:shop, post_code: "LS2 XXX", chairs: 140)
+
+    create(:shop, post_code: "LS1 XXX", chairs: 10)
+
+    expect(shop_1.small_or_large).to eq("small")
+    expect(shop_2.small_or_large).to eq("small")
+    expect(shop_3.small_or_large).to eq("small")
+    expect(shop_4.small_or_large).to eq("small")
+    expect(shop_5.small_or_large).to eq("small")
+    expect(shop_6.small_or_large).to eq("large")
+    expect(shop_7.small_or_large).to eq("large")
+    expect(shop_8.small_or_large).to eq("large")
+    expect(shop_9.small_or_large).to eq("large")
+    expect(shop_10.small_or_large).to eq("large")
+  end
 end
