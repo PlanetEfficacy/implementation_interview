@@ -11,6 +11,13 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'simplecov', require: false
 end
 
 group :development do
