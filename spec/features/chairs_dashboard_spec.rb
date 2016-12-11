@@ -1,4 +1,4 @@
-# 
+#
 #
 # 4) Create a view with the following columns[provide the view SQL]
 #     post_code: The Post Code
@@ -12,9 +12,9 @@ require 'rails_helper'
 
 RSpec.describe "It has a chairs dashboard view" do
   scenario "that includes post_code, total_places, total_chairs, chairs_pct, place_with_max_chairs, and max_chairs" do
-    shop_1 = create(:shop, chairs: 25, postal_code: "LS1 5BN")
-    shop_2 = create(:shop, chairs: 50, postal_code: "LS1 5BN")
-    shop_3 = create(:shop, chairs: 25, postal_code: "LS2 3AD")
+    shop_1 = create(:shop, chairs: 25, post_code: "LS1 5BN")
+    shop_2 = create(:shop, chairs: 50, post_code: "LS1 5BN")
+    shop_3 = create(:shop, chairs: 25, post_code: "LS2 3AD")
 
     visit chairs_dashboard_path
     within ".LS1.5BN" do
