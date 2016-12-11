@@ -17,9 +17,9 @@ RSpec.describe "It has a chairs dashboard view" do
     shop_3 = create(:shop, chairs: 25, post_code: "LS2 3AD")
 
     visit chairs_dashboard_path
-    within ".LS1.5BN" do
+    within "#0" do
       expect(page).to have_content("Postal Code")
-      expect(page).to have_content(shop_1.postal_code)
+      expect(page).to have_content(shop_1.post_code)
       expect(page).to have_content("Total Places")
       expect(page).to have_content(2)
       expect(page).to have_content("Total Chairs")
