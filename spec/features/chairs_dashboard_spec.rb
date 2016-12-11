@@ -25,7 +25,7 @@ RSpec.describe "It has a chairs dashboard view" do
       expect(page).to have_content("Total Chairs")
       expect(page).to have_content(75)
       expect(page).to have_content("Chairs Percent")
-      expect(page).to have_content("75%")
+      expect(page).to have_content("75.00%")
       expect(page).to have_content("Place with Max Chairs")
       expect(page).to have_content(shop_2.name)
       expect(page).to have_content("Max Chairs")

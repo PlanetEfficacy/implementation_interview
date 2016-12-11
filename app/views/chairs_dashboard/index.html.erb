@@ -15,7 +15,8 @@
             data: Shop.chairs_by_post(post_code) %>
         <%= render 'row',
             header: "Chairs Percent",
-            data: "#{Shop.percent_chairs_at_post(post_code)}%" %>
+            data: number_to_percentage(Shop.percent_chairs_at_post(post_code),
+                                       precision: 2) %>
         <%= render 'row',
             header: "Place with Max Chairs",
             data: Shop.place_with_max_chairs_at_post(post_code).name %>

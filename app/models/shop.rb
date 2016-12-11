@@ -12,7 +12,7 @@ class Shop < ApplicationRecord
   end
 
   def self.percent_chairs_at_post(code)
-    (chairs_by_post(code).to_f / sum(:chairs) * 100).round.to_i
+    (chairs_by_post(code).to_f / sum(:chairs) * 100)
   end
 
   def self.place_with_max_chairs_at_post(code)
