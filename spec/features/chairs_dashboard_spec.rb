@@ -1,13 +1,3 @@
-#
-#
-# 4) Create a view with the following columns[provide the view SQL]
-#     post_code: The Post Code
-#     total_places: The number of places in that Post Code
-#     total_chairs: The total number of chairs in that Post Code
-#     chairs_pct: Out of all the chairs at all the Post Codes, what percentage does this Post Code represent (should sum to 100% in the whole view)
-#     place_with_max_chairs: The name of the place with the most chairs in that Post Code
-#     max_chairs: The number of chairs at the place_with_max_chairs
-
 require 'rails_helper'
 
 RSpec.describe "It has a chairs dashboard view" do

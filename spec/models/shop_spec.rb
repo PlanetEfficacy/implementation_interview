@@ -8,6 +8,13 @@ RSpec.describe Shop, type: :model do
     expect(Shop.postal_codes).to eq(["1","2"])
   end
 
+  it "gets unique categories" do
+    create(:shop, category: "1")
+    create(:shop, category: "2")
+
+    expect(Shop.unique_categories).to eq(["1","2"])
+  end
+
   it "has a prefix" do
     shop_1 = create(:shop, post_code: "LS1 XXX")
     shop_2 = create(:shop, post_code: "LS2 XXX")

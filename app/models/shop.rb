@@ -3,6 +3,10 @@ class Shop < ApplicationRecord
     all.pluck(:post_code).uniq
   end
 
+  def self.unique_categories
+    all.pluck(:category).uniq
+  end
+
   def prefix
     standard_code? ? get_standard_code : "other"
   end

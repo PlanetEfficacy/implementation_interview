@@ -4,5 +4,6 @@ FactoryGirl.define do
     street_address "27 East Parade"
     post_code "LS1 5BN"
     chairs 20
+    category nil
   end
 end

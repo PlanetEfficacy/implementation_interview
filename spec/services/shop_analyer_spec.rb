@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ShopAnalyzer, type: :model do
+RSpec.describe ShopAnalyzer do
   it "gets count of places by postal code" do
     create_list(:shop, 2)
     count = ShopAnalyzer.new(Shop.first.post_code).shop_count
