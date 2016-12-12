@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Street Cafes of Leeds</h1>
+  <h4>Developed by: <%= mail_to "jesse@jessespevack.com", "Jesse Spevack" %></h4>
+  <table class="table">
+    <tr>
+      <th><%= link_to "Chairs dashboard", chairs_dashboard_path %></th>
+      <td>Step 4 of the Implementation Interview Script</td>
+    </tr>
+    <tr>
+      <th><%= link_to "Categories dashboard", categories_dashboard_path %></th>
+      <td>Step 6 of the Implementation Interview Script</td>
+    </tr>
+  </table>
+  <%= link_to "Export Small Shops", "/export.csv", class: "btn btn-default" %>
+</div>

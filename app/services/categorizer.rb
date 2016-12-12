@@ -5,18 +5,46 @@ class Categorizer
   end
 
   def assign_category!
-    if shop.prefix == "ls1"
-      shop.update(category: "#{shop.prefix} #{shop.size}")
-    elsif shop.prefix == "ls2"
-      puts "Processing shop #{shop.id} #{shop.name}"
-      puts "shop prefix = #{shop.prefix}"
-      puts "shop small or large = #{shop.small_or_large}"
-      puts "shop category was ##{shop.category}"
-      shop.update(category: "#{shop.prefix} #{shop.small_or_large}")
-      puts "shop category was is #{shop.category}"
-    else
-      shop.update(category: "other")
-    end
+    shop.category = ls1_category if ls1?
+    shop.category = ls2_category if ls2?
+    shop.category = "other" if other?
+    shop.save!
   end
 
+  def rename!
+    return if other?
+    re_assign if medium_or_large?
+  end
+
+  private
+
+    def ls1?
+      shop.prefix == "ls1"
+    end
+
+    def ls2?
+      shop.prefix == "ls2"
+    end
+
+    def other?
+      !ls1? && !ls2?
+    end
+
+    def ls1_category
+      "#{shop.prefix} #{shop.size}"
+    end
+
+    def ls2_category
+      "#{shop.prefix} #{shop.small_or_large}"
+    end
+
+    def medium_or_large?
+      size = ls1? ? shop.size : shop.small_or_large
+      size != "small"
+    end
+
+    def re_assign
+      shop.name = "#{shop.category} #{shop.name}"
+      shop.save!
+    end
 end

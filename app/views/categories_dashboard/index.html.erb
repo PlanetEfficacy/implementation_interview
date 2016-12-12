@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Category Dashboard</h1>
+  <% @categories.each do |category| %>
+    <div id="<%= @categories.find_index(category) %>">
+      <h3><%= category %></h3>
+      <table class="table table-hover">
+        <%= render 'rows', category_analyzer: CategoryAnalyzer.new(category) %>
+      </table>
+    </div>
+  <% end %>
+</div>

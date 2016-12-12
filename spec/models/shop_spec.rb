@@ -4,40 +4,15 @@ RSpec.describe Shop, type: :model do
   it "gets unique postal_codes" do
     create(:shop, post_code: "1")
     create(:shop, post_code: "2")
+
     expect(Shop.postal_codes).to eq(["1","2"])
   end
 
-  it "gets count of places by postal code" do
-    create_list(:shop, 2)
-    count = Shop.count_by_post(Shop.first.post_code)
-    expect(count).to eq(2)
-  end
+  it "gets unique categories" do
+    create(:shop, category: "1")
+    create(:shop, category: "2")
 
-  it "gets count of chairs by postal code" do
-    create_list(:shop, 2, chairs: 10)
-    count = Shop.chairs_by_post(Shop.first.post_code)
-    expect(count).to eq(20)
-  end
-
-  it "gets the percent of chairs at this postal code" do
-    create(:shop, post_code: "1", chairs: 20)
-    create(:shop, post_code: "2", chairs: 80)
-    percent = Shop.percent_chairs_at_post(Shop.first.post_code)
-    expect(percent).to eq(20)
-  end
-
-  it "gets the place with the most chairs at this postal code" do
-    shop_1 = create(:shop, chairs: 20, post_code: "1")
-    shop_2 = create(:shop, chairs: 80, post_code: "1")
-    place = Shop.place_with_max_chairs_at_post("1")
-    expect(place).to eq(shop_2)
-  end
-
-  it "gets the max chairs at this postal code" do
-    shop_1 = create(:shop, chairs: 20, post_code: "1")
-    shop_2 = create(:shop, chairs: 80, post_code: "1")
-    chairs = Shop.max_chairs_at_post("1")
-    expect(chairs).to eq(80)
+    expect(Shop.unique_categories).to eq(["1","2"])
   end
 
   it "has a prefix" do
@@ -63,45 +38,31 @@ RSpec.describe Shop, type: :model do
   end
 
   it "it has a 50th percentile for LS2" do
-    shop_1 = create(:shop, post_code: "LS2 XXX", chairs: 6)
-    shop_2 = create(:shop, post_code: "LS2 XXX", chairs: 18)
-    shop_3 = create(:shop, post_code: "LS2 XXX", chairs: 20)
-    shop_4 = create(:shop, post_code: "LS2 XXX", chairs: 20)
-    shop_5 = create(:shop, post_code: "LS2 XXX", chairs: 20)
-    shop_6 = create(:shop, post_code: "LS2 XXX", chairs: 51)
-    shop_7 = create(:shop, post_code: "LS2 XXX", chairs: 84)
-    shop_8 = create(:shop, post_code: "LS2 XXX", chairs: 96)
-    shop_9 = create(:shop, post_code: "LS2 XXX", chairs: 118)
-    shop_10 = create(:shop, post_code: "LS2 XXX", chairs: 140)
-
-    create(:shop, post_code: "LS1 XXX", chairs: 10)
+    create_10_LS2_shops
+    create_1_LS1_shop
 
     expect(Shop.percentile_50).to eq(35.5)
   end
 
   it "is small or large based on percentile" do
-    shop_1 = create(:shop, post_code: "LS2 XXX", chairs: 6)
-    shop_2 = create(:shop, post_code: "LS2 XXX", chairs: 18)
-    shop_3 = create(:shop, post_code: "LS2 XXX", chairs: 20)
-    shop_4 = create(:shop, post_code: "LS2 XXX", chairs: 20)
-    shop_5 = create(:shop, post_code: "LS2 XXX", chairs: 20)
-    shop_6 = create(:shop, post_code: "LS2 XXX", chairs: 51)
-    shop_7 = create(:shop, post_code: "LS2 XXX", chairs: 84)
-    shop_8 = create(:shop, post_code: "LS2 XXX", chairs: 96)
-    shop_9 = create(:shop, post_code: "LS2 XXX", chairs: 118)
-    shop_10 = create(:shop, post_code: "LS2 XXX", chairs: 140)
+    create_10_LS2_shops
+    create_1_LS1_shop
 
+    small_shops.each { |shop| expect(shop.small_or_large).to eq("small") }
+    large_shops.each { |shop| expect(shop.small_or_large).to eq("large") }
+  end
+
+  def create_1_LS1_shop
     create(:shop, post_code: "LS1 XXX", chairs: 10)
+  end
 
-    expect(shop_1.small_or_large).to eq("small")
-    expect(shop_2.small_or_large).to eq("small")
-    expect(shop_3.small_or_large).to eq("small")
-    expect(shop_4.small_or_large).to eq("small")
-    expect(shop_5.small_or_large).to eq("small")
-    expect(shop_6.small_or_large).to eq("large")
-    expect(shop_7.small_or_large).to eq("large")
-    expect(shop_8.small_or_large).to eq("large")
-    expect(shop_9.small_or_large).to eq("large")
-    expect(shop_10.small_or_large).to eq("large")
+  it "should return street cafes categorized as small as csv" do
+    shop_1 = create(:shop, category: "ls1 small")
+    shop_2 = create(:shop, category: "ls2 large")
+
+    generated_csv = Shop.export_small_street_cafes
+
+    expect(Shop.count).to eq(1)
+    expect(Shop.first).to eq(shop_2)
   end
 end

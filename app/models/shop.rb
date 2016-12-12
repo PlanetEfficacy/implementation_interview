@@ -3,24 +3,8 @@ class Shop < ApplicationRecord
     all.pluck(:post_code).uniq
   end
 
-  def self.count_by_post(code)
-    where(post_code: code).count
-  end
-
-  def self.chairs_by_post(code)
-    where(post_code: code).sum(:chairs)
-  end
-
-  def self.percent_chairs_at_post(code)
-    (chairs_by_post(code).to_f / sum(:chairs) * 100)
-  end
-
-  def self.place_with_max_chairs_at_post(code)
-    find_by(chairs: maximum(:chairs))
-  end
-
-  def self.max_chairs_at_post(code)
-    where(post_code: code).maximum(:chairs)
+  def self.unique_categories
+    all.pluck(:category).uniq.sort
   end
 
   def prefix
@@ -28,7 +12,7 @@ class Shop < ApplicationRecord
   end
 
   def self.percentile_50
-    median(where("post_code LIKE ?", "%LS2%").pluck(:chairs))
+    median(where("post_code LIKE ?", "%LS2%").order(:chairs).pluck(:chairs))
   end
 
   def small_or_large
@@ -41,7 +25,15 @@ class Shop < ApplicationRecord
     return "medium" if chairs >= 10
   end
 
-
+  def self.export_small_street_cafes
+    CSV.generate do |csv|
+      csv << column_names
+      Shop.where("category LIKE ?", "%small%").order(:name).each do |shop|
+        csv << shop.attributes.values_at(*column_names)
+        shop.destroy
+      end
+    end
+  end
 
   private
     def standard_code?

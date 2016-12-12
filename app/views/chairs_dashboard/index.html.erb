@@ -4,25 +4,7 @@
     <div id="<%= @post_codes.find_index(post_code) %>">
       <h3><%= post_code %></h3>
       <table class="table table-hover">
-        <%= render 'row',
-            header: "Postal Code",
-            data: post_code %>
-        <%= render 'row',
-            header: "Total Places",
-            data: Shop.count_by_post(post_code) %>
-        <%= render 'row',
-            header: "Total Chairs",
-            data: Shop.chairs_by_post(post_code) %>
-        <%= render 'row',
-            header: "Chairs Percent",
-            data: number_to_percentage(Shop.percent_chairs_at_post(post_code),
-                                       precision: 2) %>
-        <%= render 'row',
-            header: "Place with Max Chairs",
-            data: Shop.place_with_max_chairs_at_post(post_code).name %>
-        <%= render 'row',
-            header: "Max Chairs",
-            data: Shop.max_chairs_at_post(post_code) %>
+        <%= render 'rows', shop_analyzer: ShopAnalyzer.new(post_code) %>
       </table>
     </div>
   <% end %>
