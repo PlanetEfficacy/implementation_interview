@@ -40,6 +40,9 @@ A live version of this project can be found [here](https://implementation-interv
   Open browser to localhost:3000 or your default port
 
 ## Further explanation of tasks
+
+The tasks are copy and pasted from the Implementation Interview Script. I have added notes as bullet points under each numbered task.
+
 1. This requires Postgres (9.4+) & Rails(4.2+), so if you don't already have both installed, please install them.
   * Rails v 5.0.0.1
   * PG v 9.5.4.1
