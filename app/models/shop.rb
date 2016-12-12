@@ -1,4 +1,7 @@
 class Shop < ApplicationRecord
+  def self.postal_codes
+    all.pluck(:post_code).uniq
+  end
 
   def prefix
     standard_code? ? get_standard_code : "other"

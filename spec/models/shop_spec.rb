@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Shop, type: :model do
+  it "gets unique postal_codes" do
+    create(:shop, post_code: "1")
+    create(:shop, post_code: "2")
+
+    expect(Shop.postal_codes).to eq(["1","2"])
+  end
+
   it "has a prefix" do
     shop_1 = create(:shop, post_code: "LS1 XXX")
     shop_2 = create(:shop, post_code: "LS2 XXX")

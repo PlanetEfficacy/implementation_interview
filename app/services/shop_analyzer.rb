@@ -4,10 +4,6 @@ class ShopAnalyzer
     @post_code = post_code
   end
 
-  def self.postal_codes
-    Shop.all.pluck(:post_code).uniq
-  end
-
   def shop_count
     Shop.where(post_code: post_code).count
   end

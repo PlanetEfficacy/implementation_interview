@@ -1,13 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ShopAnalyzer, type: :model do
-  it "gets unique postal_codes" do
-    create(:shop, post_code: "1")
-    create(:shop, post_code: "2")
-
-    expect(ShopAnalyzer.postal_codes).to eq(["1","2"])
-  end
-
   it "gets count of places by postal code" do
     create_list(:shop, 2)
     count = ShopAnalyzer.new(Shop.first.post_code).shop_count
