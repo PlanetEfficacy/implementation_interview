@@ -22,7 +22,7 @@ RSpec.describe Categorizer do
     list.each do |shop|
       Categorizer.new(shop).assign_category!
     end
-
+    
     small_shops.each { |shop| expect(shop.category).to eq("ls2 small") }
     large_shops.each { |shop| expect(shop.category).to eq("ls2 large") }
   end
