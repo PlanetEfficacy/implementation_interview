@@ -1,0 +1,19 @@
+<%= render 'row',
+    header: "Postal Code",
+    data: shop_analyzer.post_code %>
+<%= render 'row',
+    header: "Total Places",
+    data: shop_analyzer.shop_count %>
+<%= render 'row',
+    header: "Total Chairs",
+    data: shop_analyzer.total_chairs %>
+<%= render 'row',
+    header: "Chairs Percent",
+    data: number_to_percentage(shop_analyzer.percent_chairs,
+                               precision: 2) %>
+<%= render 'row',
+    header: "Place with Max Chairs",
+    data: shop_analyzer.place_with_max_chairs.name %>
+<%= render 'row',
+    header: "Max Chairs",
+    data: shop_analyzer.max_chairs %>

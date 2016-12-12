@@ -1,5 +1,5 @@
 class ChairsDashboardController < ApplicationController
   def index
-    @post_codes = Shop.postal_codes
+    @post_codes = ShopAnalyzer.postal_codes
   end
 end
