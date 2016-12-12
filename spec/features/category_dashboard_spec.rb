@@ -1,7 +1,3 @@
-# 6) Write a custom view to aggregate the categories [provide view SQL AND the results of this view]
-#     category: The category column
-#     total_places: The number of places in that category
-#     total_chairs: The total chairs in that category
 require 'rails_helper'
 
 RSpec.describe "It has a category dashboard view" do

@@ -4,7 +4,7 @@ class Shop < ApplicationRecord
   end
 
   def self.unique_categories
-    all.pluck(:category).uniq
+    all.pluck(:category).uniq.sort
   end
 
   def prefix
@@ -23,6 +23,16 @@ class Shop < ApplicationRecord
     return "small" if chairs < 10
     return "large" if chairs >= 100
     return "medium" if chairs >= 10
+  end
+
+  def self.export_small_street_cafes
+    CSV.generate do |csv|
+      csv << column_names
+      Shop.where("category LIKE ?", "%small%").order(:name).each do |shop|
+        csv << shop.attributes.values_at(*column_names)
+        shop.destroy
+      end
+    end
   end
 
   private

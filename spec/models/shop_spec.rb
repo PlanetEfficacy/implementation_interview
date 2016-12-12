@@ -55,4 +55,14 @@ RSpec.describe Shop, type: :model do
   def create_1_LS1_shop
     create(:shop, post_code: "LS1 XXX", chairs: 10)
   end
+
+  it "should return street cafes categorized as small as csv" do
+    shop_1 = create(:shop, category: "ls1 small")
+    shop_2 = create(:shop, category: "ls2 large")
+
+    generated_csv = Shop.export_small_street_cafes
+
+    expect(Shop.count).to eq(1)
+    expect(Shop.first).to eq(shop_2)
+  end
 end
