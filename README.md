@@ -1,11 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is based on Implementation Interview Script found [here](https://www.evernote.com/shard/s556/sh/acac3844-a75b-49ec-a068-cde6ab6eccac/d1c75528c33e7e2d). Thanks you for your time and consideration.
 
-Things you may want to cover:
+## Setup
+`git clone `
 
-* Ruby version
 
 * System dependencies
 
