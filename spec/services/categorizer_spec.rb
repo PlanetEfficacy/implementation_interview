@@ -33,7 +33,7 @@ RSpec.describe Categorizer do
     expect(shop.category).to eq("other")
   end
 
-  it "re-categorizes large and medium shops" do
+  it "re-names large and medium shops" do
     shop_1 = create(  :shop,
                       name: "shop",
                       category: "ls1 large",
@@ -57,11 +57,11 @@ RSpec.describe Categorizer do
                       category: "other",
                       chairs: 80 )
 
-    Categorizer.new(shop_1).re_assign_category!
-    Categorizer.new(shop_2).re_assign_category!
-    Categorizer.new(shop_3).re_assign_category!
-    Categorizer.new(shop_4).re_assign_category!
-    Categorizer.new(shop_5).re_assign_category!
+    Categorizer.new(shop_1).rename!
+    Categorizer.new(shop_2).rename!
+    Categorizer.new(shop_3).rename!
+    Categorizer.new(shop_4).rename!
+    Categorizer.new(shop_5).rename!
 
     expect(shop_1.name).to eq("ls1 large shop")
     expect(shop_2.name).to eq("ls1 medium shop")

@@ -11,7 +11,7 @@ class Categorizer
     shop.save!
   end
 
-  def re_assign_category!
+  def rename!
     return if other?
     re_assign if medium_or_large?
   end
@@ -48,5 +48,3 @@ class Categorizer
       shop.save!
     end
 end
- # For street cafes categorized as medium or large, write a script that
- # concatenates the category name to the beginning of the name and writes it back to the name column

@@ -10,7 +10,14 @@ csv.each do |row|
                           chairs:          row["Chairs"] )
 end
 
-
+puts "\n\nStarting to categorize....\n\n"
 Shop.all.each do |shop|
   Categorizer.new(shop).assign_category!
+end
+
+puts "\n\nStarting to rename....\n\n"
+Shop.all.each do |shop|
+  puts "shop #{shop.id} with category #{shop.category} was #{shop.name}"
+  Categorizer.new(shop).rename!
+  puts "shop #{shop.id} with category #{shop.category} is now #{shop.name}"
 end
