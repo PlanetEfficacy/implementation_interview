@@ -76,6 +76,16 @@ The tasks are copy and pasted from the Implementation Interview Script. I have a
 
           max_chairs: SELECT chairs FROM shops WHERE post_code='LS1 5BN' AND chairs=(SELECT MAX(chairs) FROM shops WHERE post_code='LS1 5BN');
 
+          CREATE OR REPLACE VIEW postal_code_view AS
+            SELECT post_code,
+            COUNT(id) AS total_shops,
+            SUM(chairs) AS total_chairs,
+            name AS place_with_max_chairs,
+            MAX(chairs) AS max_chairs
+            FROM shops
+            WHERE chairs = (SELECT max(chairs) from shops)
+            GROUP BY post_code, name;
+
 
 5. Write a Rails script to categorize the cafes and write the result to the category according to the rules:[provide the script]
 
