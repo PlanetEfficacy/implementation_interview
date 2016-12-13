@@ -98,7 +98,12 @@ The tasks are copy and pasted from the Implementation Interview Script. I have a
       total_chairs: The total chairs in that category
 
     * For view, visit "https://implementation-interview.herokuapp.com/categories"
-    * Implementation of database queries can be found in "app/services/category_analyzer.rb"  
+    * Implementation of database queries can be found in "app/services/category_analyzer.rb"
+    * In SQL I would do the following:
+
+          category: 'ls1 medium'
+          total places: SELECT COUNT(id) AS total_places FROM shops WHERE category='ls1 medium';
+          total chairs: SELECT SUM(chairs) AS total_chairs FROM shops WHERE category='ls1 medium';
 
 7. Write a script in rails to:
         a) For street_cafes categorized as small, write a script that exports their data to a csv and deletes the records
