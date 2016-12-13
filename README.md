@@ -65,10 +65,15 @@ The tasks are copy and pasted from the Implementation Interview Script. I have a
     * In SQL I would do the following:
 
           postal code: 'LS1 5BN'
+
           total places: SELECT COUNT(id) AS total_places FROM shops WHERE post_code='LS1 5BN';
+
           total chairs: SELECT SUM(chairs) AS total_chairs FROM shops WHERE post_code='LS1 5BN';
           chairs pct: SELECT SUM(chairs * 100.0 / (SELECT SUM(chairs) FROM shops)) AS total_chairs FROM shops WHERE post_code='LS1 5BN';
-          place_with_max_chairs: SELECT name FROM shops WHERE post_code='LS1 5BN' AND chairs=(SELECT MAX(chairs) FROM shops WHERE post_code='LS1 5BN');
+
+          place_with_max_chairs: SELECT name FROM shops WHERE
+          post_code='LS1 5BN' AND chairs=(SELECT MAX(chairs) FROM shops WHERE post_code='LS1 5BN');
+
           max_chairs: SELECT chairs FROM shops WHERE post_code='LS1 5BN' AND chairs=(SELECT MAX(chairs) FROM shops WHERE post_code='LS1 5BN');
 
 
@@ -102,7 +107,9 @@ The tasks are copy and pasted from the Implementation Interview Script. I have a
     * In SQL I would do the following:
 
           category: 'ls1 medium'
+
           total places: SELECT COUNT(id) AS total_places FROM shops WHERE category='ls1 medium';
+
           total chairs: SELECT SUM(chairs) AS total_chairs FROM shops WHERE category='ls1 medium';
 
 7. Write a script in rails to:
