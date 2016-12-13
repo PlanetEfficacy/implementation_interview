@@ -62,6 +62,15 @@ The tasks are copy and pasted from the Implementation Interview Script. I have a
 
     * For view, visit "https://implementation-interview.herokuapp.com/chairs"
     * Implementation of database queries can be found in "app/services/shop_analyzer.rb"
+    * In SQL I would do the following:
+
+          postal code: 'LS1 5BN'
+          total places: SELECT COUNT(id) AS total_places FROM shops WHERE post_code='LS1 5BN';
+          total chairs: SELECT SUM(chairs) AS total_chairs FROM shops WHERE post_code='LS1 5BN';
+          chairs pct: SELECT SUM(chairs * 100.0 / (SELECT SUM(chairs) FROM shops)) AS total_chairs FROM shops WHERE post_code='LS1 5BN';
+          place_with_max_chairs: SELECT name FROM shops WHERE post_code='LS1 5BN' AND chairs=(SELECT MAX(chairs) FROM shops WHERE post_code='LS1 5BN');
+          max_chairs: SELECT chairs FROM shops WHERE post_code='LS1 5BN' AND chairs=(SELECT MAX(chairs) FROM shops WHERE post_code='LS1 5BN');
+
 
 5. Write a Rails script to categorize the cafes and write the result to the category according to the rules:[provide the script]
 
